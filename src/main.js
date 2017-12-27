@@ -28,14 +28,12 @@ const stopAnimate = function(){
 }
 
 const animateSnake=function() {
-  console.log(snake.tailLength);
   let oldHead=snake.getHead();
   let oldTail=snake.move();
   let head=snake.getHead();
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);
-  console.log(snake.body[0]);
   if(isGameOver()){
     displayGameOver();
     stopAnimate();
@@ -56,7 +54,6 @@ const changeSnakeDirection=function(event) {
       snake.turnRight();
       break;
     case "KeyC":
-      snake.tailLength+=1;
       snake.grow();
       break;
     default:

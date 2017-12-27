@@ -17,6 +17,7 @@ Snake.prototype={
     return this.body.shift();
   },
   grow:function() {
+    this.tailLength+=1;
     this.body.unshift(new Position(Infinity,Infinity,this.direction));
   },
   turnLeft:function() {
@@ -25,38 +26,41 @@ Snake.prototype={
   turnRight:function() {
     this.head=this.head.turnRight();
   },
-  isSnakeHitsLeftWall: function(){
+  isHitsLeftWall: function(){
     let head = this.head;
     return head.x == 0;
   },
-  isSnakeHitsUpWall: function(){
+  isHitsUpWall: function(){
     let head = this.head;
     return head.y == 0 ;
   },
-  isSnakeHitsRightWall: function(rightEndOfWall){
+  isHitsRightWall: function(rightEndOfWall){
     let head = this.head;
     return head.x == rightEndOfWall;
   },
-  isSnakeHitsDownWall: function(gridHeight){
+  isHitsDownWall: function(gridHeight){
     let head = this.head;
     return head.y == gridHeight;
   },
-  isSnakeHitsSideWall: function(rightEndOfWall){
-    return this.isSnakeHitsLeftWall()||this.isSnakeHitsRightWall(rightEndOfWall)
+  isHitsSideWall: function(rightEndOfWall){
+    return this.isHitsLeftWall()||this.isHitsRightWall(rightEndOfWall)
   },
-  isSnakeHitsUpDownWall: function(gridHeight){
-    return this.isSnakeHitsUpWall()||this.isSnakeHitsDownWall(gridHeight);
+  isHitsUpDownWall: function(gridHeight){
+    return this.isHitsUpWall()||this.isHitsDownWall(gridHeight);
   },
-  isSnakeHitsItself: function(){
+  isHitsItself: function(){
     let head = this.head;
     let body = this.body;
   },
-  isSnakeHitsItself: function(){
+  isHitsItself: function(){
     let head = this.head;
     let body = this.body;
-    return head.x == body.x||head.y == body.y;
+    let tailLength = this.tailLength;
+    let diffOfXCoords = head.x-body[0].x;
+    let diffOfYCoords = head.y-body[0].y;
+    return (head.x == body[0].x&&diffOfYCoords<tailLength)||(head.y == body[0].y&&diffOfXCoords<tailLength);
   },
   isDied: function(rightEndOfWall,gridHeight){
-    return this.isSnakeHitsSideWall(rightEndOfWall)||this.isSnakeHitsUpDownWall(gridHeight)||this.isSnakeHitsItself();
+    return this.isHitsSideWall(rightEndOfWall)||this.isHitsUpDownWall(gridHeight)||this.isHitsItself();
   }
 }
