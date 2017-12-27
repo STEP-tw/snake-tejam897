@@ -24,3 +24,10 @@
   background-color: blue;
   border-radius: 50%;
 }
+
+
+#statusBoard {
+  text-align: center;
+  margin-top: :50px;
+  font-size: 50px
+}

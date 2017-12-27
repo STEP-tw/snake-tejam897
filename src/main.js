@@ -6,7 +6,17 @@ let numberOfCols=120;
 let animator=undefined;
 
 const isGameOver = function(){
-  return snake.isDied(numberOfRows,numberOfCols);
+  console.log(numberOfCols);
+  return snake.isDied(numberOfCols,numberOfRows);
+}
+
+const displayGameOver = function(){
+  let statusBoard = document.getElementById('statusBoard');
+  statusBoard.innerText = 'GAMEOVER';
+}
+
+const stopAnimate = function(){
+  clearInterval (animator)
 }
 
 const animateSnake=function() {
@@ -16,6 +26,12 @@ const animateSnake=function() {
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);
+  console.log(head);
+  console.log(oldTail);
+      if(isGameOver()){
+    displayGameOver();
+    stopAnimate();
+  }
   if(head.isSameCoordAs(food)) {
     snake.grow();
     createFood(numberOfRows,numberOfCols);

@@ -38,7 +38,7 @@ Snake.prototype={
   },
   isSnakeHitsDownWall: function(gridHeight){
     let head = this.head;
-    return head.x == gridHeight;
+    return head.y == gridHeight;
   },
   isSnakeHitsSideWall: function(rightEndOfWall){
     return this.isSnakeHitsLeftWall()||this.isSnakeHitsRightWall(rightEndOfWall)
@@ -46,7 +46,7 @@ Snake.prototype={
   isSnakeHitsUpDownWall: function(gridHeight){
     return this.isSnakeHitsUpWall()||this.isSnakeHitsDownWall(gridHeight);
   },
-  isDied: function(gridHeight,gridWidth){
-    return this.isSnakeHitsSideWall(gridWidth)||this.isSnakeHitsUpDownWall(gridHeight);
+  isDied: function(rightEndOfWall,gridHeight){
+    return this.isSnakeHitsSideWall(rightEndOfWall)||this.isSnakeHitsUpDownWall(gridHeight);
   }
 }
