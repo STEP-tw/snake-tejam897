@@ -5,6 +5,10 @@ let numberOfCols=120;
 
 let animator=undefined;
 
+const isGameOver = function(){
+  return snake.isDied(numberOfRows,numberOfCols);
+}
+
 const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
