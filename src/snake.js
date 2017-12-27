@@ -55,10 +55,9 @@ Snake.prototype={
   isHitsItself: function(){
     let head = this.head;
     let body = this.body;
-    let tailLength = this.tailLength;
-    let diffOfXCoords = head.x-body[0].x;
-    let diffOfYCoords = head.y-body[0].y;
-    return (head.x == body[0].x&&diffOfYCoords<tailLength)||(head.y == body[0].y&&diffOfXCoords<tailLength);
+    return body.some(function(position){
+      return position.isSameCoordAs(head)
+    })
   },
   isDied: function(rightEndOfWall,gridHeight){
     return this.isHitsSideWall(rightEndOfWall)||this.isHitsUpDownWall(gridHeight)||this.isHitsItself();
