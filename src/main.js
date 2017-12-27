@@ -6,8 +6,16 @@ let numberOfCols=120;
 let animator=undefined;
 
 const isGameOver = function(){
-  console.log(numberOfCols);
-  return snake.isDied(numberOfCols,numberOfRows);
+  return snake.isDied(numberOfCols-1,numberOfRows-1);
+}
+
+const createResetButton = function(){
+  let statusBoard = document.getElementById('statusBoard');
+  let button = document.createElement("button");
+  button.innerText = 'reset';
+  button.type = 'reset'
+  button.onclick = location.reload();
+  statusBoard.appendChild(button);
 }
 
 const displayGameOver = function(){
@@ -20,15 +28,15 @@ const stopAnimate = function(){
 }
 
 const animateSnake=function() {
+  console.log(snake.tailLength);
   let oldHead=snake.getHead();
   let oldTail=snake.move();
   let head=snake.getHead();
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);
-  console.log(head);
-  console.log(oldTail);
-      if(isGameOver()){
+  console.log(snake.body[0]);
+  if(isGameOver()){
     displayGameOver();
     stopAnimate();
   }
@@ -48,6 +56,7 @@ const changeSnakeDirection=function(event) {
       snake.turnRight();
       break;
     case "KeyC":
+      snake.tailLength+=1;
       snake.grow();
       break;
     default:

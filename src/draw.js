@@ -9,7 +9,7 @@ const drawGrids=function(numberOfRows,numberOfCols) {
     }
     grid.appendChild(row);
   }
-}
+}  
 
 const paintCell=function(pos,color) {
   let cell=document.getElementById(pos.getCoord().join("_"));

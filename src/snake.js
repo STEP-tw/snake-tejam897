@@ -1,6 +1,7 @@
 const Snake=function(head,body) {
   this.head=head;
   this.body=body;
+  this.tailLength = 2;
 }
 
 Snake.prototype={
@@ -30,7 +31,7 @@ Snake.prototype={
   },
   isSnakeHitsUpWall: function(){
     let head = this.head;
-    return head.y == 0;
+    return head.y == 0 ;
   },
   isSnakeHitsRightWall: function(rightEndOfWall){
     let head = this.head;
@@ -46,7 +47,16 @@ Snake.prototype={
   isSnakeHitsUpDownWall: function(gridHeight){
     return this.isSnakeHitsUpWall()||this.isSnakeHitsDownWall(gridHeight);
   },
+  isSnakeHitsItself: function(){
+    let head = this.head;
+    let body = this.body;
+  },
+  isSnakeHitsItself: function(){
+    let head = this.head;
+    let body = this.body;
+    return head.x == body.x||head.y == body.y;
+  },
   isDied: function(rightEndOfWall,gridHeight){
-    return this.isSnakeHitsSideWall(rightEndOfWall)||this.isSnakeHitsUpDownWall(gridHeight);
+    return this.isSnakeHitsSideWall(rightEndOfWall)||this.isSnakeHitsUpDownWall(gridHeight)||this.isSnakeHitsItself();
   }
 }
